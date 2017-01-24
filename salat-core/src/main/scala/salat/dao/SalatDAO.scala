@@ -344,10 +344,15 @@ abstract class SalatDAO[ObjectType <: AnyRef, ID <: Any](val collection: MongoCo
    * Checks the "err" field in the write result, or the cached last error.
    * "There should be no reason to use getError" - we found one.
    */
+  // @TODO: Changed
+  /*
   private def defaultWriteResultErrorCheck(wr: WriteResult) = wr.getError != null || {
     val lastError = wr.getCachedLastError
     lastError != null && !lastError.ok()
   }
+  */
+  private def defaultWriteResultErrorCheck(wr: WriteResult) = false
+
   /**
    * Safety net for legacy code that is still using MongoConnection instead
    * of MongoClient, and so will not reliably throw a MongoException.
